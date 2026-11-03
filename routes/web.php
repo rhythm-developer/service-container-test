@@ -13,3 +13,11 @@ Route::get('/test', function () {
 });
 
 Route::get('/payment', [PaymentController::class, 'pay']);
+
+Route::get('/stripe', function () {
+
+    $payment = app(\App\Services\StripeGateway::class);
+
+    return $payment->pay(1000);
+
+});
