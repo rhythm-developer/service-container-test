@@ -4,5 +4,5 @@ namespace App\Contracts;
 
 interface PaymentGatewayInterface
 {
-    public function charge($amount);
+    public function pay($amount);
 }

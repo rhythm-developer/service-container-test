@@ -6,7 +6,7 @@ use App\Contracts\PaymentGatewayInterface;
 
 class StripeGateway implements PaymentGatewayInterface
 {
-    public function charge ($amount)
+    public function pay($amount)
     {
         return "Charged $$amount using Stripe.";
     }
