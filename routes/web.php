@@ -12,12 +12,4 @@ Route::get('/test', function () {
     return 'Test';
 });
 
-Route::get('/payment', function () {
-
-    $payment = app(
-        \App\Contracts\PaymentGatewayInterface::class
-    );
-
-    return $payment->pay(1000);
-
-});
+Route::get('/payment', [PaymentController::class, 'pay']);

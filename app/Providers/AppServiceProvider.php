@@ -14,7 +14,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(PaymentGatewayInterface::class, PaypalGateway::class);
+        $this->app->bind(
+            PaymentGatewayInterface::class,
+            function ($app) {
+
+                return match (request()->query('gateway')) {
+                    'stripe' => $app->make(StripeGateway::class),
+                    'paypal' => $app->make(PaypalGateway::class),
+
+                    default => throw new InvalidArgumentException(
+                        'Invalid payment gateway.'
+                    ),
+                };
+            }
+        );
     }
 
     /**
